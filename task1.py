@@ -1,6 +1,5 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-from find_shortest_paths import find_shortest_paths
 
 G = nx.DiGraph()
 edges = [
@@ -57,22 +56,3 @@ num_edges = G.number_of_edges()
 print(f"Список ребер: {list(G.edges)}")
 print(f"Кількість вершин: {num_nodes}")
 print(f"Кількість ребер: {num_edges}")
-
-
-start = "0"
-end_points = ["8", "10", "11", "12"]
-shortest_paths = find_shortest_paths(G, start, end_points)
-
-for end, data in shortest_paths.items():
-    print(
-        f"Найкоротший шлях від вершини {start} до вершини {end}: {data.get('path', None)}"
-    )
-
-    if data["path"]:
-        path = data["path"]
-        path_weight_sum = sum(
-            G[path[i]][path[i + 1]].get("weight", 0) for i in range(len(path) - 1)
-        )
-        print(f"Сума ваг ребер для цього шляху: {path_weight_sum}\n")
-    else:
-        print(f"Неможливо дістатися до вершини {end} з вершини {start}.\n")
